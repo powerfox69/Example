@@ -47,16 +47,17 @@ class ViewController: UIViewController {
     
     private func setupImageView() {
         imageView.image = UIImage(named: "hog")
-        imageView.frame = CGRect(x: 30, y: 130, width: 100, height: 200)
+        imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
         
-        imageContainerView.frame = imageView.bounds
+        imageContainerView.frame = CGRect(x: 30, y: 130, width: 100, height: 200)
         imageContainerView.layer.shadowColor = UIColor.black.cgColor
         imageContainerView.layer.shadowOffset = CGSize(width: 15, height: 15)
         imageContainerView.layer.shadowOpacity = 1
         imageContainerView.layer.shadowRadius = 10
         
+        imageView.frame = imageContainerView.bounds
         imageContainerView.addSubview(imageView)
     }
     
