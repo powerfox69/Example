@@ -27,6 +27,8 @@ class ViewController: UIViewController {
         
         view.addSubview(textLabel)
         view.addSubview(imageContainerView)
+        
+        setapLayout()
     }
     
     private func updateNumbers() {
@@ -42,7 +44,7 @@ class ViewController: UIViewController {
         textLabel.text = firstNumber?.formatted()
         textLabel.font = .systemFont(ofSize: 30, weight: .bold)
         textLabel.textColor = .red
-        textLabel.frame = CGRect(x: 30, y: 30, width: 100, height: 50)
+        //textLabel.frame = CGRect(x: 30, y: 30, width: 100, height: 50)
     }
     
     private func setupImageView() {
@@ -70,5 +72,37 @@ class ViewController: UIViewController {
         
         view.layer.insertSublayer(gradient, at: 0)
     }
+    
+    private func setapLayout() {
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+       /*
+        let leftConstraint = NSLayoutConstraint(
+            item: textLabel,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .top,
+            multiplier: 1.0,
+            constant: 100
+        )
+        
+        let centrConstraint = NSLayoutConstraint(
+            item: textLabel,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0
+        )
+        
+        NSLayoutConstraint.activate([leftConstraint, centrConstraint])
+    }
+        */
 }
-
