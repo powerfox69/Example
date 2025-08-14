@@ -14,20 +14,17 @@ class ViewController: UIViewController {
     private let imageView = UIImageView()
     private let imageContainerView = UIView()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
         updateNumbers()
         
-        setupLabel()
-        setupImageView()
-        setupView()
-        
         view.addSubview(textLabel)
         view.addSubview(imageContainerView)
         
+        setupLabel()
+        setupImageView()
+        setupView()
         setapLayout()
     }
     
@@ -44,23 +41,40 @@ class ViewController: UIViewController {
         textLabel.text = firstNumber?.formatted()
         textLabel.font = .systemFont(ofSize: 30, weight: .bold)
         textLabel.textColor = .red
-        //textLabel.frame = CGRect(x: 30, y: 30, width: 100, height: 50)
     }
     
     private func setupImageView() {
         imageView.image = UIImage(named: "hog")
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageContainerView.frame = CGRect(x: 30, y: 130, width: 100, height: 200)
         imageContainerView.layer.shadowColor = UIColor.black.cgColor
         imageContainerView.layer.shadowOffset = CGSize(width: 15, height: 15)
         imageContainerView.layer.shadowOpacity = 1
         imageContainerView.layer.shadowRadius = 10
-        
-        imageView.frame = imageContainerView.bounds
+        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
+
         imageContainerView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageContainerView.topAnchor.constraint(
+                equalTo: textLabel.bottomAnchor, constant: 150),
+            imageContainerView.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor),
+            imageContainerView.heightAnchor.constraint(equalToConstant: 200),
+            imageContainerView.widthAnchor.constraint(equalToConstant: 200),
+            
+            imageView.topAnchor.constraint(
+                equalTo: imageContainerView.topAnchor),
+            imageView.bottomAnchor.constraint(
+                equalTo: imageContainerView.bottomAnchor),
+            imageView.leftAnchor.constraint(
+                equalTo: imageContainerView.leftAnchor),
+            imageView.rightAnchor.constraint(
+                equalTo: imageContainerView.rightAnchor)
+        ])
     }
     
     private func setupView() {
@@ -77,32 +91,9 @@ class ViewController: UIViewController {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            textLabel.topAnchor.constraint(
+                equalTo: view.topAnchor, constant: 100),
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-       /*
-        let leftConstraint = NSLayoutConstraint(
-            item: textLabel,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .top,
-            multiplier: 1.0,
-            constant: 100
-        )
-        
-        let centrConstraint = NSLayoutConstraint(
-            item: textLabel,
-            attribute: .centerX,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .centerX,
-            multiplier: 1.0,
-            constant: 0
-        )
-        
-        NSLayoutConstraint.activate([leftConstraint, centrConstraint])
-    }
-        */
 }
