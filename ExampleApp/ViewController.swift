@@ -48,17 +48,35 @@ class ViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageContainerView.layer.shadowColor = UIColor.black.cgColor
         imageContainerView.layer.shadowOffset = CGSize(width: 15, height: 15)
         imageContainerView.layer.shadowOpacity = 1
         imageContainerView.layer.shadowRadius = 10
-        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
 
         imageContainerView.addSubview(imageView)
+    }
+    
+    private func setupView() {
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.green.cgColor, UIColor.blue.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
         
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    private func setapLayout() {
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(
+                equalTo: view.topAnchor, constant: 100),
+            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             imageContainerView.topAnchor.constraint(
                 equalTo: textLabel.bottomAnchor, constant: 150),
             imageContainerView.centerXAnchor.constraint(
@@ -74,26 +92,6 @@ class ViewController: UIViewController {
                 equalTo: imageContainerView.leftAnchor),
             imageView.rightAnchor.constraint(
                 equalTo: imageContainerView.rightAnchor)
-        ])
-    }
-    
-    private func setupView() {
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.green.cgColor, UIColor.blue.cgColor]
-        gradient.startPoint = CGPoint(x: 0, y: 0)
-        gradient.endPoint = CGPoint(x: 1, y: 1)
-        
-        view.layer.insertSublayer(gradient, at: 0)
-    }
-    
-    private func setapLayout() {
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            textLabel.topAnchor.constraint(
-                equalTo: view.topAnchor, constant: 100),
-            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
