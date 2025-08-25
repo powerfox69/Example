@@ -9,7 +9,7 @@ class ShadowViwe: UIView {
         setupView()
         setupImageView(imageName)
         setupLayout()
-            
+        
         
     }
     
@@ -33,6 +33,7 @@ class ShadowViwe: UIView {
         layer.shadowOffset = CGSize(width: 15, height: 15)
         layer.shadowOpacity = 1
         layer.shadowRadius = 10
+        
     }
     
     private func setupLayout() {
@@ -44,5 +45,12 @@ class ShadowViwe: UIView {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let shadowPath = UIBezierPath(rect: bounds)
+        layer.shadowPath = shadowPath.cgPath
+
     }
 }
